@@ -44,8 +44,8 @@ docker compose -f docker/github-readme-stats/compose.yml up -d
 Put the service behind HTTPS with your reverse proxy, then use URLs like:
 
 ```txt
-https://stats.example.com/api?username=CraftingDragon007&show_icons=true&theme=tokyonight&hide_border=true
-https://stats.example.com/api/top-langs/?username=CraftingDragon007&layout=compact&theme=tokyonight&hide_border=true
+https://stats.example.com/api?username=craftingdragon&show_icons=true&theme=tokyonight&hide_border=true
+https://stats.example.com/api/top-langs/?username=craftingdragon&layout=compact&theme=tokyonight&hide_border=true
 ```
 
-Keep `WHITELIST=CraftingDragon007` unless you intentionally want other GitHub users to use your instance.
+Keep `WHITELIST=craftingdragon` unless you intentionally want other GitHub users to use your instance.

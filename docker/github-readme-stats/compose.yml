@@ -7,6 +7,6 @@ services:
       - "9000:9000"
     environment:
       PAT_1: ${PAT_1:?set PAT_1 in your environment or .env file}
-      WHITELIST: CraftingDragon007
+      WHITELIST: craftingdragon
       CACHE_SECONDS: "86400"
       PORT: "9000"
