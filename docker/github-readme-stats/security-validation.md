@@ -55,3 +55,7 @@ docker run --rm -v /tmp/readme-scan:/images:ro \
 ```
 
 Use `--severity CRITICAL,HIGH --exit-code 1` for a separate Trivy gate; keep an unrestricted scan to report all findings. Scanner failures are never passing results. The reproduction command uses the scanner's default user; the deployed applications always use the non-root users listed above.
+
+## Shared-memory zone portability correction
+
+Both upstream zones were increased from 64 KiB to 1 MiB. [nginx checks for a minimum of eight host memory pages](https://github.com/nginx/nginx/blob/master/src/http/modules/ngx_http_upstream_zone_module.c), so 64 KiB fails on 16/64 KiB page hosts. Configuration, startup, routing, cached SVG rendering, non-root restrictions and cache persistence were rerun successfully on the local linux/amd64 host. A large-page host was not available for runtime verification; 1 MiB exceeds the source-level minimum for 64 KiB pages. The change affects only the mounted configuration, so the scanned image IDs are unchanged.
