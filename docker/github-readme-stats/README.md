@@ -71,3 +71,5 @@ https://ghreadme.craftingdragon.ch/streak/?user=craftingdragon&theme=blue-green&
 ```
 
 Keep `WHITELIST=craftingdragon` unless you intentionally want other GitHub users to use your instance.
+
+The proxy image derives from `nginxinc/nginx-unprivileged:alpine3.24`, runs as UID/GID `101:101`, and sends startup errors to stderr with `nginx -e /dev/stderr`. This also avoids attempts to open nginx’s compiled-in error-log path before the configuration is loaded. The build removes the unused XSLT, njs, GeoIP, and image-filter module packages, allowing apk to remove their orphaned libraries (including libxml2/libxslt). Build checks enforce that the XML libraries stay absent. It explicitly upgrades nginx as well, replacing the base image’s pinned apk constraint. See the validation report for scan results and the musl backport assessment.

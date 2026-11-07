@@ -36,7 +36,7 @@ services:
   nginx:
     image: registry.gamepowerx.com/github-readme-nginx:latest
     build: ../nginx
-    user: "10002:10002"
+    user: "101:101"
     restart: unless-stopped
     read_only: true
     cap_drop: [ALL]
