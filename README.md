@@ -10,5 +10,5 @@
 </p>
 
 <p align="center">
-  <img alt="GitHub streak" src="https://streak-stats.demolab.com/?user=craftingdragon&theme=blue-green&hide_border=true" />
+  <img alt="GitHub streak" src="https://ghreadme.craftingdragon.ch/streak/?user=craftingdragon&theme=blue-green&hide_border=true" />
 </p>

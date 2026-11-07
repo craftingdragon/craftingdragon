@@ -1,12 +1,55 @@
 services:
   github-readme-stats:
     image: registry.gamepowerx.com/github-readme-stats:latest
+    build: .
+    user: "10001:10001"
     container_name: github-readme-stats
     restart: unless-stopped
-    ports:
-      - "9000:9000"
+    read_only: true
+    cap_drop: [ALL]
+    security_opt: [no-new-privileges:true]
+    tmpfs:
+      - /tmp:mode=1777
     environment:
       PAT_1: ${PAT_1:?set PAT_1 in your environment or .env file}
       WHITELIST: craftingdragon
       CACHE_SECONDS: "86400"
       PORT: "9000"
+
+  github-readme-streak-stats:
+    build:
+      context: ../github-readme-streak-stats
+    image: registry.gamepowerx.com/github-readme-streak-stats:latest
+    user: "82:82"
+    volumes:
+      - streak-cache:/app/cache
+    restart: unless-stopped
+    read_only: true
+    cap_drop: [ALL]
+    security_opt: [no-new-privileges:true]
+    tmpfs:
+      - /tmp:mode=1777
+    environment:
+      TOKEN: ${PAT_1:?set PAT_1 in your environment or .env file}
+      WHITELIST: craftingdragon
+
+  nginx:
+    image: registry.gamepowerx.com/github-readme-nginx:latest
+    build: ../nginx
+    user: "10002:10002"
+    restart: unless-stopped
+    read_only: true
+    cap_drop: [ALL]
+    security_opt: [no-new-privileges:true]
+    tmpfs:
+      - /tmp:mode=1777
+    ports:
+      - "9000:8080"
+    volumes:
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf:ro
+    depends_on:
+      - github-readme-stats
+      - github-readme-streak-stats
+
+volumes:
+  streak-cache:
